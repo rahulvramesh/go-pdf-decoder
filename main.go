@@ -1,9 +1,8 @@
 package main
 
 import (
-	"encoding/base64"
-	//"io"
-	"os"
+	"github.com/sivsivsree/go-pdf-decoder/decoder"
+	"log"
 )
 
 var b64 = `JVBERi0xLjQKJdPr6eEKMSAwIG9iago8PC9DcmVhdG9yIChNb3ppbGxhLzUuMCBcKE1hY2ludG9z
@@ -3200,21 +3199,8 @@ YWlsZXIKPDwvU2l6ZSAxMDQKL1Jvb3QgMTUgMCBSCi9JbmZvIDEgMCBSPj4Kc3RhcnR4cmVmCjE3
 OTczNwolJUVPRg==`
 
 func main() {
-	dec, err := base64.StdEncoding.DecodeString(b64)
-	if err != nil {
-		panic(err)
-	}
 
-	f, err := os.Create("myfilename.pdf")
-	if err != nil {
-		panic(err)
-	}
-	defer f.Close()
-
-	if _, err := f.Write(dec); err != nil {
-		panic(err)
-	}
-	if err := f.Sync(); err != nil {
-		panic(err)
+	if err := decoder.Decode("", "test.pdf"); err != nil {
+		log.Println(err)
 	}
 }
